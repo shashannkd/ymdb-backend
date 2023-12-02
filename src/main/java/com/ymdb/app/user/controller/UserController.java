@@ -1,7 +1,9 @@
 package com.ymdb.app.user.controller;
 
+import com.ymdb.app.user.entity.Credentials;
 import com.ymdb.app.user.entity.User;
 import com.ymdb.app.user.service.impl.UserServiceImpl;
+import jakarta.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,14 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/delete/{userId}")
-    public ResponseEntity<String> register(@PathVariable String userId) {
+    public ResponseEntity<String> delete(@PathVariable String userId) {
         logger.info("User: delete call");
         return userService.deleteUser(userId) != null ? ResponseEntity.ok("User with userId " + userId + " Deleted Successfully") : ResponseEntity.ok("User Deletion Failed for userId " + userId);
+    }
+
+    @PostMapping("/authenticate")
+    public boolean authenticate(@Nonnull @RequestBody Credentials credentials) {
+        return userService.authenticate(credentials);
     }
 
 }

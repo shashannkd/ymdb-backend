@@ -1,6 +1,4 @@
-# pharm-connect
-
-## Sample Data
+# YMDb
 
 ## API Development
 
